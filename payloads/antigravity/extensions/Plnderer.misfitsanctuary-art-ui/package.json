@@ -1,0 +1,62 @@
+{
+  "name": "misfitsanctuary-art-ui",
+  "displayName": "MisfitSanctuary.Art UI",
+  "publisher": "Plnderer",
+  "description": "MisfitSanctuary.Art UI theme, icons, and glass overlays for Antigravity.",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "icon": "assets/Misfit Logo.png",
+  "contributes": {
+    "themes": [
+      {
+        "label": "MisfitSanctuary.Art UI",
+        "uiTheme": "vs-dark",
+        "path": "./themes/misfitsanctuary-art-ui.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "misfit-glass",
+        "label": "Misfit Glass",
+        "path": "./icons/icons.json"
+      }
+    ],
+    "productIconThemes": [
+      {
+        "id": "misfit-carbon",
+        "label": "Misfit Carbon",
+        "path": "./product-icons/product-icons.json"
+      }
+    ],
+    "configurationDefaults": {
+      "workbench.colorTheme": "MisfitSanctuary.Art UI",
+      "workbench.iconTheme": "misfit-glass",
+      "workbench.productIconTheme": "misfit-carbon",
+      "workbench.colorCustomizations": {
+        "editor.background": "#05050500",
+        "terminal.background": "#05050500",
+        "panel.background": "#05050500",
+        "sideBar.background": "#05050500",
+        "activityBar.background": "#05050500",
+        "statusBar.background": "#05050500",
+        "titleBar.activeBackground": "#05050500",
+        "titleBar.inactiveBackground": "#05050500",
+        "tab.activeBackground": "#05050540",
+        "tab.inactiveBackground": "#05050520",
+        "tab.unfocusedActiveBackground": "#05050530",
+        "tab.unfocusedInactiveBackground": "#05050518",
+        "tab.hoverBackground": "#0a120a33",
+        "tab.border": "#7DFB3920",
+        "tab.activeBorder": "#7DFB3940",
+        "tab.activeBorderTop": "#7DFB3966",
+        "tab.unfocusedActiveBorder": "#7DFB3933",
+        "tab.unfocusedActiveBorderTop": "#7DFB3940"
+      }
+    }
+  }
+}

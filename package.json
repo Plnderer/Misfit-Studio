@@ -1,0 +1,13 @@
+{
+  "name": "misfit-installer-kit",
+  "private": true,
+  "scripts": {
+    "dev": "cd installer-ui && npm run dev",
+    "build": "cd installer-ui && npm run build",
+    "tauri": "node scripts/run-tauri.js",
+    "dev:studio": "node scripts/run-tauri.js dev",
+    "build:studio": "node scripts/run-tauri.js build",
+    "dev:vibe": "node scripts/run-tauri.js dev --config tauri.conf.vibe.json",
+    "build:vibe": "node scripts/run-tauri.js build --config tauri.conf.vibe.json"
+  }
+}

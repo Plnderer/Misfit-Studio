@@ -1,0 +1,17 @@
+/* MisfitSanctuary.Art UI JETSKI START */
+html,
+body {
+  background-color: transparent !important;
+}
+
+.bg-ide-chat-background {
+  background-color: rgba(8, 12, 8, 0.18) !important;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+.bg-agent-convo-background,
+.bg-editor-background {
+  background-color: rgba(5, 5, 5, 0.35) !important;
+}
+/* MisfitSanctuary.Art UI JETSKI END */

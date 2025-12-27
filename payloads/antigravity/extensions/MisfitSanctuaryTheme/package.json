@@ -1,0 +1,20 @@
+{
+  "name": "misfitsanctuary-theme",
+  "displayName": "MisfitSanctuary.Art",
+  "description": "VS Code color theme based on MisfitSanctuary.Art brand neon green + ember gold palette.",
+  "version": "0.0.1",
+  "publisher": "misfitsanctuary",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": ["Themes"],
+  "contributes": {
+    "themes": [
+      {
+        "label": "MisfitSanctuary.Art",
+        "uiTheme": "vs-dark",
+        "path": "./themes/misfitsanctuary-color-theme.json"
+      }
+    ]
+  }
+}

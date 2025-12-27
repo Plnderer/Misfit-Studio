@@ -1,0 +1,31 @@
+{
+  "name": "misfitsanctuary-animations",
+  "displayName": "MisfitSanctuary Animations",
+  "description": "Adds a glowing status bar badge and an animated Misfit panel to VS Code.",
+  "version": "0.0.1",
+  "publisher": "misfitsanctuary",
+  "engines": {
+    "vscode": "^1.92.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:misfitsanctuary.showPanel"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "misfitsanctuary.showPanel",
+        "title": "MisfitSanctuary: Show Animated Panel"
+      }
+    ]
+  },
+  "main": "src/extension.js",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.92.0",
+    "eslint": "^9.12.0"
+  }
+}

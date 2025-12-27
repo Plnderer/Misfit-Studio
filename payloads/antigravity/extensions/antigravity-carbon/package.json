@@ -1,0 +1,22 @@
+{
+  "name": "antigravity-carbon",
+  "displayName": "Antigravity Carbon",
+  "description": "Technical Sci-Fi Product Icons",
+  "version": "1.0.0",
+  "publisher": "antigravity",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Product Icon Themes"
+  ],
+  "contributes": {
+    "productIconThemes": [
+      {
+        "id": "antigravity-carbon",
+        "label": "Antigravity Carbon",
+        "path": "./product-icons.json"
+      }
+    ]
+  }
+}

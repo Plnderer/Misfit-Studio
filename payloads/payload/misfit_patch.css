@@ -1,0 +1,96 @@
+/* MisfitSanctuary.Art UI START (Lite - High Performance) */
+/* Optimized for low memory and CPU usage by removing backdrop-filter and global animations */
+
+.monaco-workbench {
+    --ag-neon-pink: #7dfb39;
+    --ag-neon-cyan: #a0ff60;
+    --ag-neon-yellow: #f6a526;
+    --ag-neon-blue: #7dfb39;
+    --ag-neon-purple: #ffbe4c;
+    --ag-tooltip-bg: #0a0a0a;
+    --ag-glass-border: rgba(125, 251, 57, 0.15);
+
+    /* Fallback colors replacing expensive glass/blur effects */
+    --ag-glass-desc: rgba(10, 15, 10, 0.95);
+    --ag-glass-strong: rgba(6, 10, 6, 0.95);
+    --ag-glass-mid: rgba(15, 20, 15, 0.95);
+
+    position: relative;
+    background-color: #050505;
+}
+
+/* Disable expensive global fog animation */
+.monaco-workbench:before {
+    content: none;
+}
+
+/* Optimized UI Backgrounds - No Backdrop Filter */
+.monaco-workbench .part.sidebar,
+.monaco-workbench .part.auxiliarybar,
+.monaco-workbench .part.panel,
+.monaco-workbench .part.activitybar,
+.monaco-workbench .part.statusbar,
+.monaco-workbench .part.titlebar,
+.monaco-workbench .titlebar-container {
+    background-color: var(--ag-glass-strong) !important;
+    border-right: 1px solid var(--ag-glass-border);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+/* Editor Area - Simplified */
+.monaco-workbench .part.editor>.content,
+.monaco-workbench .monaco-editor,
+.monaco-workbench .monaco-editor-background,
+.monaco-workbench .monaco-editor .view-lines {
+    background-color: var(--ag-glass-desc) !important;
+}
+
+/* Misfit Logo - Static (No Animation) */
+.monaco-editor:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 240px;
+    height: 240px;
+    transform: translate(-50%, -50%);
+    background-image: url("data:image/png;base64,__MISFIT_LOGO_DATA__");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.15;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 0;
+    /* Reduced visual complexity */
+    filter: grayscale(0.2) opacity(0.8);
+    will-change: auto;
+}
+
+/* Removed secondary smoke effects */
+.monaco-editor:after {
+    content: none;
+}
+
+/* Remove expensive tooltips/cursor shadows */
+.monaco-editor .monaco-hover {
+    background-color: var(--ag-tooltip-bg);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    animation: none !important;
+}
+
+.monaco-editor .cursor {
+    box-shadow: none !important;
+    animation: none !important;
+}
+
+/* Explicitly disable reduced motion animations */
+@media (prefers-reduced-motion: no-preference) {
+    .monaco-workbench * {
+        animation-duration: 0s !important;
+    }
+}
+
+/* MisfitSanctuary.Art UI END */

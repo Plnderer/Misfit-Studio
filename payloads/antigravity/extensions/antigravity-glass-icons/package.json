@@ -1,0 +1,20 @@
+{
+  "name": "antigravity-glass-icons",
+  "displayName": "Antigravity Glass Icons",
+  "description": "A futuristic glassmorphic icon theme for Antigravity",
+  "version": "0.0.1",
+  "publisher": "user",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": ["Icon Themes"],
+  "contributes": {
+    "iconThemes": [
+      {
+        "id": "antigravity-glass",
+        "label": "Antigravity Glass",
+        "path": "./icons.json"
+      }
+    ]
+  }
+}

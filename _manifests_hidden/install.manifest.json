@@ -1,0 +1,31 @@
+{
+    "appName": "Misfit Kit",
+    "version": "1.0.0",
+    "publisher": "Misfit Sanctuary",
+    "description": "Installs the Misfit theme and patches your workbench.",
+    "targets": [
+        "test_target"
+    ],
+    "payloadDir": "payload",
+    "installSteps": [
+        {
+            "type": "patchBlock",
+            "file": "../test_target/workbench.css",
+            "startMarker": "/* START_MARKER */",
+            "endMarker": "/* END_MARKER */",
+            "contentFile": "misfit_patch.css"
+        },
+        {
+            "type": "setJsonValue",
+            "file": "../test_target/settings.json",
+            "keyPath": "theme",
+            "value": "Misfit Dark"
+        },
+        {
+            "type": "base64Embed",
+            "file": "../test_target/workbench.css",
+            "placeholder": "__MISFIT_LOGO_DATA__",
+            "inputFile": "payload/logo.png"
+        }
+    ]
+}

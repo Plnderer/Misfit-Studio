@@ -1,0 +1,8 @@
+Misfit Studio.exe
+*.log
+.DS_Store
+Thumbs.db
+node_modules
+dist
+installer-ui/dist
+src-tauri/target

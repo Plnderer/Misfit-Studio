@@ -1,0 +1,283 @@
+/* MisfitSanctuary.Art UI START */
+/* Lite performance preset (static fog, animated logo) */
+.monaco-workbench{
+  --ag-neon-pink:#7dfb39;
+  --ag-neon-cyan:#a0ff60;
+  --ag-neon-yellow:#f6a526;
+  --ag-neon-blue:#7dfb39;
+  --ag-neon-purple:#ffbe4c;
+  --ag-tooltip-bg:#0a0a0a;
+  --ag-grid-color:rgba(125,251,57,.12);
+  --ag-glow-soft:rgba(125,251,57,.35);
+  --ag-horizon-line:rgba(246,165,38,.35);
+  --ag-horizon-glow:rgba(125,251,57,.22);
+  --ag-fog-green:rgba(125,251,57,.22);
+  --ag-fog-ember:rgba(246,165,38,.18);
+  --ag-fog-deep:rgba(6,12,8,.55);
+  --ag-glass-strong:rgba(6,10,6,.22);
+  --ag-glass-mid:rgba(6,10,6,.18);
+  --ag-glass-light:rgba(6,10,6,.12);
+  --ag-glass-border:rgba(125,251,57,.08);
+  position:relative;
+  isolation:isolate;
+  background-color:#050505;
+}
+
+.monaco-workbench:before{
+  content:"";
+  position:fixed;
+  inset:-15%;
+  pointer-events:none;
+  z-index:0;
+  background-image:
+    radial-gradient(60% 50% at 15% 15%,var(--ag-fog-green),rgba(0,0,0,0) 60%),
+    radial-gradient(55% 45% at 85% 20%,var(--ag-fog-ember),rgba(0,0,0,0) 62%),
+    radial-gradient(60% 55% at 50% 85%,var(--ag-fog-green),rgba(0,0,0,0) 70%),
+    radial-gradient(120% 90% at 50% 50%,var(--ag-fog-deep),rgba(0,0,0,0) 65%);
+  background-repeat:no-repeat;
+  background-size:140% 140%,150% 150%,160% 160%,200% 200%;
+  background-position:0% 10%,100% 20%,40% 100%,50% 50%;
+  opacity:.8;
+}
+
+.mtk3,.mtk6,.mtk7,.mtk8,.mtk9,.mtk10{
+  display:inline-block;
+  transition:transform .4s ease;
+  will-change:transform;
+}
+
+.mtk3:hover,.mtk6:hover,.mtk7:hover,.mtk8:hover,.mtk9:hover,.mtk10:hover{
+  transform:scale(1.2);
+  text-shadow:0 0 15px var(--ag-neon-cyan);
+}
+
+.monaco-editor,.editor-group-container{position:relative;}
+
+.monaco-editor .monaco-hover{
+  background-color:var(--ag-tooltip-bg);
+  padding:20px;
+  transition:opacity 1s!important;
+  opacity:1;
+  position:relative;
+}
+
+.monaco-editor .monaco-hover.hidden{opacity:0;}
+
+.monaco-editor .monaco-hover:after{
+  content:"";
+  position:absolute;
+  bottom:-1px;
+  left:0;
+  right:0;
+  height:4px;
+  background-size:200% 200%;
+  width:100%;
+  background-image:linear-gradient(to right,var(--ag-neon-pink),var(--ag-neon-cyan),var(--ag-neon-pink));
+  animation:ag-neonline 2s infinite linear;
+}
+
+.monaco-editor .selected-text{
+  background-color:#000000aa!important;
+  box-shadow:0 0 35px 5px var(--ag-glow-soft);
+  color:#fff!important;
+}
+
+.monaco-editor .cursor{
+  box-shadow:0 0 15px 2px var(--ag-neon-blue);
+  animation:ag-cursor .5s infinite linear;
+}
+
+.view-line .inline-folded:after{
+  border-radius:5px;
+  animation:ag-collapse .5s linear;
+}
+
+.monaco-editor .line-numbers.active-line-number{
+  color:var(--ag-neon-cyan);
+  text-shadow:0 0 1px var(--ag-neon-yellow)!important;
+}
+
+.editor-group-container:after{content:none!important;}
+
+.editor-group-container:before{
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 2px,#fff 2px,#fff 4px);
+  background-size:100% 4px;
+  transform-origin:50% 50%;
+  content:"";
+  opacity:.02;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  pointer-events:none;
+}
+
+.monaco-editor:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:240px;
+  height:240px;
+  transform:translate(-50%,-50%);
+  background-image:url("data:image/png;base64,__MISFIT_LOGO_DATA__");
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  opacity:.22;
+  filter:brightness(1.35) contrast(1.5) saturate(1.35) drop-shadow(0 0 12px rgba(246,165,38,.6)) drop-shadow(0 0 22px rgba(125,251,57,.45));
+  pointer-events:none;
+  mix-blend-mode:screen;
+  animation:ag-neon-breathe 7.5s ease-in-out infinite;
+  z-index:0;
+}
+
+.monaco-editor:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:210px;
+  height:210px;
+  transform:translate(-50%,-50%);
+  background-image:
+    radial-gradient(circle at 50% 50%,rgba(246,165,38,.3),rgba(246,165,38,0) 70%),
+    radial-gradient(circle at 50% 50%,rgba(125,251,57,.22),rgba(125,251,57,0) 75%);
+  opacity:.35;
+  filter:blur(10px);
+  pointer-events:none;
+  mix-blend-mode:screen;
+  animation:ag-neon-breathe 7.5s ease-in-out infinite;
+  z-index:0;
+}
+
+.monaco-workbench .part.editor>.content,
+.monaco-workbench .monaco-editor,
+.monaco-workbench .monaco-editor-background,
+.monaco-workbench .monaco-editor .overflow-guard,
+.monaco-workbench .monaco-editor .scrollable-element,
+.monaco-workbench .monaco-editor .margin,
+.monaco-workbench .monaco-editor .view-lines{
+  background-color:var(--ag-glass-light)!important;
+}
+
+.monaco-workbench .editor-group-container,
+.monaco-workbench .editor-group-container>.title,
+.monaco-workbench .editor-group-container>.title .tabs-container{
+  background-color:transparent!important;
+}
+
+.monaco-workbench .part.panel,
+.monaco-workbench .part.activitybar,
+.monaco-workbench .part.statusbar,
+.monaco-workbench .part.titlebar,
+.monaco-workbench .titlebar,
+.monaco-workbench .titlebar-container{
+  background-color:var(--ag-glass-mid)!important;
+}
+
+.monaco-workbench .part.sidebar,
+.monaco-workbench .part.auxiliarybar,
+.monaco-workbench .part.panel{
+  background-color:var(--ag-glass-strong)!important;
+  backdrop-filter:blur(22px) saturate(165%);
+  -webkit-backdrop-filter:blur(22px) saturate(165%);
+  border-right:1px solid var(--ag-glass-border);
+  box-shadow:inset 0 0 0 1px rgba(125,251,57,.05),0 0 30px rgba(0,0,0,.5);
+}
+
+.monaco-workbench .part.panel{border-top:1px solid rgba(125,251,57,.07);}
+
+.monaco-workbench .part.sidebar .pane-header,
+.monaco-workbench .part.auxiliarybar .pane-header,
+.monaco-workbench .part.panel .pane-header{
+  background-color:rgba(6,10,6,.2)!important;
+}
+
+.monaco-workbench .part.sidebar .pane-body,
+.monaco-workbench .part.auxiliarybar .pane-body,
+.monaco-workbench .part.panel .pane-body{
+  background-color:transparent!important;
+}
+
+.monaco-workbench .part.sidebar .composite,
+.monaco-workbench .part.auxiliarybar .composite,
+.monaco-workbench .part.panel .composite{
+  background-color:transparent!important;
+}
+
+.monaco-workbench .part.sidebar .monaco-list,
+.monaco-workbench .part.sidebar .monaco-list-rows,
+.monaco-workbench .part.sidebar .monaco-scrollable-element,
+.monaco-workbench .part.sidebar .pane,
+.monaco-workbench .part.sidebar .view-pane{
+  background-color:transparent!important;
+}
+
+.monaco-workbench .part.auxiliarybar .monaco-list,
+.monaco-workbench .part.auxiliarybar .monaco-list-rows,
+.monaco-workbench .part.auxiliarybar .monaco-scrollable-element,
+.monaco-workbench .part.auxiliarybar .pane,
+.monaco-workbench .part.auxiliarybar .view-pane{
+  background-color:transparent!important;
+}
+
+.monaco-workbench .part.panel .monaco-list,
+.monaco-workbench .part.panel .monaco-list-rows,
+.monaco-workbench .part.panel .monaco-scrollable-element,
+.monaco-workbench .part.panel .pane,
+.monaco-workbench .part.panel .view-pane{
+  background-color:transparent!important;
+}
+
+.monaco-workbench .terminal-outer-container,
+.monaco-workbench .terminal-outer-container .monaco-scrollable-element,
+.monaco-workbench .xterm,
+.monaco-workbench .xterm-viewport,
+.monaco-workbench .xterm-screen,
+.monaco-workbench .xterm-rows,
+.monaco-workbench .terminal-outer-container .xterm-viewport,
+.monaco-workbench .terminal-outer-container .xterm-screen{
+  background-color:transparent!important;
+}
+
+.monaco-workbench .activitybar,
+.monaco-workbench .activitybar .content{
+  background-color:var(--ag-glass-mid)!important;
+  backdrop-filter:blur(16px) saturate(150%);
+  -webkit-backdrop-filter:blur(16px) saturate(150%);
+}
+
+@keyframes ag-tooltippulse{0%{box-shadow:0 0 0 0 rgba(125,251,57,0)}50%{box-shadow:0 0 85px 0 rgba(246,165,38,.5)}100%{box-shadow:0 0 0 0 rgba(125,251,57,0)}}
+@keyframes ag-neonline{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+@keyframes ag-collapse{0%{background-color:var(--ag-neon-yellow);box-shadow:0 0 5px 0 var(--ag-neon-yellow)}70%{background-color:var(--ag-neon-yellow);box-shadow:0 0 35px 10px var(--ag-neon-yellow)}100%{background-color:transparent}}
+@keyframes ag-cursor{0%{box-shadow:0 0 5px 0 var(--ag-neon-blue)}100%{box-shadow:0 0 35px 5px var(--ag-neon-blue)}}
+@keyframes ag-fog-drift{0%{background-position:0% 10%,100% 20%,40% 100%,50% 50%;transform:translateY(0) scale(1)}50%{background-position:20% 0%,80% 30%,55% 90%,45% 45%;transform:translateY(-10px) scale(1.02)}100%{background-position:0% 10%,100% 20%,40% 100%,50% 50%;transform:translateY(0) scale(1)}}
+@keyframes ag-fog-pulse{0%{opacity:.6}50%{opacity:.85}100%{opacity:.6}}
+@keyframes ag-neon-breathe{0%{opacity:.18;transform:translate(-50%,-50%) scale(.98)}50%{opacity:.3;transform:translate(-50%,-50%) scale(1.02)}100%{opacity:.18;transform:translate(-50%,-50%) scale(.98)}}
+
+.monaco-workbench.reduce-motion .monaco-editor .monaco-hover,
+.monaco-workbench.reduce-motion .monaco-editor .cursor,
+.monaco-workbench.reduce-motion .view-line .inline-folded:after,
+.monaco-workbench.reduce-motion:before,
+.monaco-workbench.reduce-motion .monaco-editor:before,
+.monaco-workbench.reduce-motion .monaco-editor:after{animation:none!important;}
+
+.monaco-workbench.reduce-motion .mtk3,
+.monaco-workbench.reduce-motion .mtk6,
+.monaco-workbench.reduce-motion .mtk7,
+.monaco-workbench.reduce-motion .mtk8,
+.monaco-workbench.reduce-motion .mtk9,
+.monaco-workbench.reduce-motion .mtk10{transition:none!important;}
+
+@media (prefers-reduced-motion:reduce){
+  .monaco-editor .monaco-hover,
+  .monaco-editor .cursor,
+  .view-line .inline-folded:after,
+  .monaco-workbench:before,
+  .monaco-editor:before,
+  .monaco-editor:after{animation:none!important;}
+  .mtk3,.mtk6,.mtk7,.mtk8,.mtk9,.mtk10{transition:none!important;}
+}
+/* MisfitSanctuary.Art UI END */

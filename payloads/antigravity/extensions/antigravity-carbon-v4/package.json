@@ -1,0 +1,22 @@
+{
+  "name": "antigravity-carbon",
+  "displayName": "Antigravity Carbon V4",
+  "description": "Technical Sci-Fi Product Icons (V4 Structure)",
+  "version": "4.0.0",
+  "publisher": "antigravity",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Product Icon Themes"
+  ],
+  "contributes": {
+    "productIconThemes": [
+      {
+        "id": "antigravity-carbon-v4",
+        "label": "Antigravity Carbon V4",
+        "path": "./dist/theme.json"
+      }
+    ]
+  }
+}
