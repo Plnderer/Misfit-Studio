@@ -246,11 +246,11 @@ const ANTIGRAVITY_FULL_STEPS: InstallStep[] = [
             'tab.unfocusedActiveBackground': '#05050530',
             'tab.unfocusedInactiveBackground': '#05050518',
             'tab.hoverBackground': '#0a120a33',
-            'tab.border': '#7DFB3920',
             'tab.activeBorder': '#7DFB3940',
             'tab.activeBorderTop': '#7DFB3966',
             'tab.unfocusedActiveBorder': '#7DFB3933',
-            'tab.unfocusedActiveBorderTop': '#7DFB3940'
+            'tab.unfocusedActiveBorderTop': '#7DFB3940',
+            'terminal.selectionBackground': '#ffbe4c40'
         }
     }
 ];
