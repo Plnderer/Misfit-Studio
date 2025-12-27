@@ -114,6 +114,7 @@ interface PresetData {
     description: string;
     advancedMode: boolean;
     payloadDir?: string;
+    targets?: string[];
     steps: PresetStep[];
 }
 
@@ -561,6 +562,7 @@ const normalizePresetData = (raw: any): PresetData => ({
     description: typeof raw?.description === 'string' ? raw.description : 'Created with Misfit Studio',
     advancedMode: Boolean(raw?.advancedMode),
     payloadDir: typeof raw?.payloadDir === 'string' ? raw.payloadDir : undefined,
+    targets: Array.isArray(raw?.targets) ? raw.targets.filter((t: any) => typeof t === 'string') : [],
     steps: coercePresetSteps(raw?.steps)
 });
 
@@ -669,6 +671,7 @@ export default function Dashboard() {
     const [publisher, setPublisher] = useState('Misfit');
     const [description, setDescription] = useState('Created with Misfit Studio');
     const [advancedMode, setAdvancedMode] = useState(false);
+    const [targets, setTargets] = useState<string[]>(['windows']);
     const [payloadDir, setPayloadDir] = useState('payloads');
     const [steps, setSteps] = useState<UiStep[]>([]);
     const [newStepType, setNewStepType] = useState<StepType>('copy');
@@ -747,6 +750,7 @@ export default function Dashboard() {
         setPublisher(data.publisher ?? 'Misfit');
         setDescription(data.description ?? 'Created with Misfit Studio');
         setAdvancedMode(Boolean(data.advancedMode));
+        setTargets(Array.isArray(data.targets) && data.targets.length > 0 ? data.targets : ['windows']);
         const nextPayloadDir = data.payloadDir
             ?? (preset.name.toLowerCase().includes('antigravity') ? 'payloads/antigravity' : payloadDirValue);
         setPayloadDir(nextPayloadDir);
@@ -799,6 +803,7 @@ export default function Dashboard() {
             publisher,
             description,
             advancedMode,
+            targets,
             payloadDir: payloadDirValue,
             steps: uiStepsToPresetSteps(steps)
         };
@@ -915,6 +920,7 @@ export default function Dashboard() {
         setPublisher(manifest.publisher ?? 'Misfit');
         setDescription(manifest.description ?? 'Created with Misfit Studio');
         setAdvancedMode(Boolean(manifest.advancedMode));
+        setTargets(Array.isArray(manifest.targets) && manifest.targets.length > 0 ? manifest.targets : ['windows']);
         setPayloadDir(manifest.payloadDir ?? 'payloads');
         const incoming = Array.isArray(manifest.installSteps)
             ? manifest.installSteps
@@ -1026,7 +1032,7 @@ export default function Dashboard() {
             publisher,
             description,
             advancedMode,
-            targets: [],
+            targets,
             payloadDir: payloadDirValue,
             installSteps
         };
@@ -1443,6 +1449,28 @@ export default function Dashboard() {
                         <label className="field">
                             <span>Edition</span>
                             <input type="text" value={version} onChange={e => setVersion(e.target.value)} />
+                        </label>
+
+                        <label className="field">
+                            <span>Target Platforms</span>
+                            <div className="checkbox-group">
+                                {['windows', 'macos', 'linux'].map(os => (
+                                    <label key={os} className="checkbox-item">
+                                        <input
+                                            type="checkbox"
+                                            checked={targets.includes(os)}
+                                            onChange={e => {
+                                                if (e.target.checked) {
+                                                    setTargets(p => [...p, os]);
+                                                } else {
+                                                    setTargets(p => p.filter(t => t !== os));
+                                                }
+                                            }}
+                                        />
+                                        {os.charAt(0).toUpperCase() + os.slice(1)}
+                                    </label>
+                                ))}
+                            </div>
                         </label>
 
                         <label className="field">

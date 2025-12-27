@@ -5,7 +5,7 @@
   "identifier": "com.misfit.studio",
   "build": {
     "frontendDist": "../installer-ui/dist",
-    "beforeDevCommand": "npm --prefix ./installer-ui run dev",
+    "beforeDevCommand": "npm --prefix ../installer-ui run dev",
     "beforeBuildCommand": ""
   },
   "app": {
