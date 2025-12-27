@@ -584,7 +584,7 @@ export default function Dashboard() {
         const fetchRemotePresets = async () => {
             try {
                 // Fetch from remote or local fallback
-                const res = await fetch(PRESET_URL, { cache: 'no-cache' }).catch(() => fetch('/presets.json'));
+                const res = await fetch(`${PRESET_URL}?t=${Date.now()}`, { cache: 'no-cache' }).catch(() => fetch('/presets.json'));
                 if (res && res.ok) {
                     const json = await res.json();
                     if (Array.isArray(json)) {
