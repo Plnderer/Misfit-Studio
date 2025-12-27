@@ -566,7 +566,8 @@ async fn build_project(request: BuildRequest, app_handle: tauri::AppHandle) -> R
     }
 
     // 1. Copy Executable (Self-Replication)
-    let dest_exe = dist_root.join(format!("{}.exe", project_name));
+    let ext = if cfg!(target_os = "windows") { ".exe" } else { "" };
+    let dest_exe = dist_root.join(format!("{}{}", project_name, ext));
     std::fs::copy(&exe_path, &dest_exe).map_err(|e| format!("Failed to copy executable: {}", e))?;
 
     // 2. Write Manifest
