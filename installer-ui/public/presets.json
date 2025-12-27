@@ -1,0 +1,173 @@
+[
+    {
+        "name": "Misfit Vibe",
+        "description": "Full Misfit Sanctuary experience with theme, icons, and glassy UI.",
+        "steps": [
+            {
+                "type": "copy",
+                "src": "extensions/antigravity-carbon",
+                "dest": "%USERPROFILE%\\.antigravity\\extensions\\antigravity-carbon"
+            },
+            {
+                "type": "copy",
+                "src": "extensions/antigravity-carbon-v4",
+                "dest": "%USERPROFILE%\\.antigravity\\extensions\\antigravity-carbon-v4"
+            },
+            {
+                "type": "copy",
+                "src": "extensions/antigravity-glass-icons",
+                "dest": "%USERPROFILE%\\.antigravity\\extensions\\antigravity-glass-icons"
+            },
+            {
+                "type": "copy",
+                "src": "extensions/MisfitSanctuaryAnimations",
+                "dest": "%USERPROFILE%\\.antigravity\\extensions\\MisfitSanctuaryAnimations"
+            },
+            {
+                "type": "copy",
+                "src": "extensions/MisfitSanctuaryTheme",
+                "dest": "%USERPROFILE%\\.antigravity\\extensions\\MisfitSanctuaryTheme"
+            },
+            {
+                "type": "copy",
+                "src": "extensions/Plnderer.misfitsanctuary-art-ui",
+                "dest": "%USERPROFILE%\\.antigravity\\extensions\\Plnderer.misfitsanctuary-art-ui"
+            },
+            {
+                "type": "patchBlock",
+                "file": "%LOCALAPPDATA%\\Programs\\Antigravity\\resources\\app\\out\\vs\\workbench\\workbench.desktop.main.css",
+                "startMarker": "/* MisfitSanctuary.Art UI START */",
+                "endMarker": "/* MisfitSanctuary.Art UI END */",
+                "contentFile": "overlays/workbench.overlay.css"
+            },
+            {
+                "type": "patchBlock",
+                "file": "%LOCALAPPDATA%\\Programs\\Antigravity\\resources\\app\\out\\jetskiMain.tailwind.css",
+                "startMarker": "/* MisfitSanctuary.Art UI JETSKI START */",
+                "endMarker": "/* MisfitSanctuary.Art UI JETSKI END */",
+                "contentFile": "overlays/jetski.overlay.css"
+            },
+            {
+                "type": "setJsonValue",
+                "file": "%APPDATA%\\Antigravity\\User\\settings.json",
+                "keyPath": "workbench\\.colorTheme",
+                "value": "MisfitSanctuary.Art UI"
+            },
+            {
+                "type": "setJsonValue",
+                "file": "%APPDATA%\\Antigravity\\User\\settings.json",
+                "keyPath": "workbench\\.iconTheme",
+                "value": "misfit-glass"
+            },
+            {
+                "type": "setJsonValue",
+                "file": "%APPDATA%\\Antigravity\\User\\settings.json",
+                "keyPath": "workbench\\.productIconTheme",
+                "value": "misfit-carbon"
+            },
+            {
+                "type": "setJsonValue",
+                "file": "%APPDATA%\\Antigravity\\User\\settings.json",
+                "keyPath": "workbench\\.colorCustomizations",
+                "value": {
+                    "editor.background": "#05050500",
+                    "terminal.background": "#05050500",
+                    "panel.background": "#05050500",
+                    "sideBar.background": "#05050500",
+                    "activityBar.background": "#05050500",
+                    "statusBar.background": "#05050500",
+                    "titleBar.activeBackground": "#05050500",
+                    "titleBar.inactiveBackground": "#05050500",
+                    "tab.activeBackground": "#05050540",
+                    "tab.inactiveBackground": "#05050520",
+                    "tab.unfocusedActiveBackground": "#05050530",
+                    "tab.unfocusedInactiveBackground": "#05050518",
+                    "tab.hoverBackground": "#0a120a33",
+                    "tab.activeBorder": "#7DFB3940",
+                    "tab.activeBorderTop": "#7DFB3966",
+                    "tab.unfocusedActiveBorder": "#7DFB3933",
+                    "tab.unfocusedActiveBorderTop": "#7DFB3940",
+                    "terminal.selectionBackground": "#ffbe4c40"
+                }
+            }
+        ]
+    },
+    {
+        "name": "Misfit Lite",
+        "description": "Lighter version without heavy animations.",
+        "steps": [
+            {
+                "type": "copy",
+                "src": "extensions/antigravity-carbon",
+                "dest": "%USERPROFILE%\\.antigravity\\extensions\\antigravity-carbon"
+            },
+            {
+                "type": "copy",
+                "src": "extensions/antigravity-glass-icons",
+                "dest": "%USERPROFILE%\\.antigravity\\extensions\\antigravity-glass-icons"
+            },
+            {
+                "type": "copy",
+                "src": "extensions/MisfitSanctuaryTheme",
+                "dest": "%USERPROFILE%\\.antigravity\\extensions\\MisfitSanctuaryTheme"
+            },
+            {
+                "type": "patchBlock",
+                "file": "%LOCALAPPDATA%\\Programs\\Antigravity\\resources\\app\\out\\vs\\workbench\\workbench.desktop.main.css",
+                "startMarker": "/* MisfitSanctuary.Art UI START */",
+                "endMarker": "/* MisfitSanctuary.Art UI END */",
+                "contentFile": "overlays/workbench.overlay.css"
+            },
+            {
+                "type": "patchBlock",
+                "file": "%LOCALAPPDATA%\\Programs\\Antigravity\\resources\\app\\out\\jetskiMain.tailwind.css",
+                "startMarker": "/* MisfitSanctuary.Art UI JETSKI START */",
+                "endMarker": "/* MisfitSanctuary.Art UI JETSKI END */",
+                "contentFile": "overlays/jetski.overlay.css"
+            },
+            {
+                "type": "setJsonValue",
+                "file": "%APPDATA%\\Antigravity\\User\\settings.json",
+                "keyPath": "workbench\\.colorTheme",
+                "value": "MisfitSanctuary.Art UI"
+            },
+            {
+                "type": "setJsonValue",
+                "file": "%APPDATA%\\Antigravity\\User\\settings.json",
+                "keyPath": "workbench\\.iconTheme",
+                "value": "misfit-glass"
+            },
+            {
+                "type": "setJsonValue",
+                "file": "%APPDATA%\\Antigravity\\User\\settings.json",
+                "keyPath": "workbench\\.productIconTheme",
+                "value": "misfit-carbon"
+            },
+            {
+                "type": "setJsonValue",
+                "file": "%APPDATA%\\Antigravity\\User\\settings.json",
+                "keyPath": "workbench\\.colorCustomizations",
+                "value": {
+                    "editor.background": "#05050500",
+                    "terminal.background": "#05050500",
+                    "panel.background": "#05050500",
+                    "sideBar.background": "#05050500",
+                    "activityBar.background": "#05050500",
+                    "statusBar.background": "#05050500",
+                    "titleBar.activeBackground": "#05050500",
+                    "titleBar.inactiveBackground": "#05050500",
+                    "tab.activeBackground": "#05050540",
+                    "tab.inactiveBackground": "#05050520",
+                    "tab.unfocusedActiveBackground": "#05050530",
+                    "tab.unfocusedInactiveBackground": "#05050518",
+                    "tab.hoverBackground": "#0a120a33",
+                    "tab.activeBorder": "#7DFB3940",
+                    "tab.activeBorderTop": "#7DFB3966",
+                    "tab.unfocusedActiveBorder": "#7DFB3933",
+                    "tab.unfocusedActiveBorderTop": "#7DFB3940",
+                    "terminal.selectionBackground": "#ffbe4c40"
+                }
+            }
+        ]
+    }
+]

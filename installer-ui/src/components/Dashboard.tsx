@@ -189,78 +189,7 @@ const COMMON_TARGETS = [
     { label: 'Extensions path (USERPROFILE)', value: '%USERPROFILE%\\.antigravity\\extensions\\<EXTENSION_NAME>' }
 ];
 
-const ANTIGRAVITY_FULL_STEPS: InstallStep[] = [
-    { type: 'copy', src: 'extensions/antigravity-carbon', dest: '%USERPROFILE%\\.antigravity\\extensions\\antigravity-carbon' },
-    { type: 'copy', src: 'extensions/antigravity-carbon-v4', dest: '%USERPROFILE%\\.antigravity\\extensions\\antigravity-carbon-v4' },
-    { type: 'copy', src: 'extensions/antigravity-glass-icons', dest: '%USERPROFILE%\\.antigravity\\extensions\\antigravity-glass-icons' },
-    { type: 'copy', src: 'extensions/MisfitSanctuaryAnimations', dest: '%USERPROFILE%\\.antigravity\\extensions\\MisfitSanctuaryAnimations' },
-    { type: 'copy', src: 'extensions/MisfitSanctuaryTheme', dest: '%USERPROFILE%\\.antigravity\\extensions\\MisfitSanctuaryTheme' },
-    { type: 'copy', src: 'extensions/Plnderer.misfitsanctuary-art-ui', dest: '%USERPROFILE%\\.antigravity\\extensions\\Plnderer.misfitsanctuary-art-ui' },
-    {
-        type: 'patchBlock',
-        file: '%LOCALAPPDATA%\\Programs\\Antigravity\\resources\\app\\out\\vs\\workbench\\workbench.desktop.main.css',
-        startMarker: '/* MisfitSanctuary.Art UI START */',
-        endMarker: '/* MisfitSanctuary.Art UI END */',
-        contentFile: 'overlays/workbench.overlay.css'
-    },
-    {
-        type: 'patchBlock',
-        file: '%LOCALAPPDATA%\\Programs\\Antigravity\\resources\\app\\out\\jetskiMain.tailwind.css',
-        startMarker: '/* MisfitSanctuary.Art UI JETSKI START */',
-        endMarker: '/* MisfitSanctuary.Art UI JETSKI END */',
-        contentFile: 'overlays/jetski.overlay.css'
-    },
-    {
-        type: 'setJsonValue',
-        file: '%APPDATA%\\Antigravity\\User\\settings.json',
-        keyPath: 'workbench\\.colorTheme',
-        value: 'MisfitSanctuary.Art UI'
-    },
-    {
-        type: 'setJsonValue',
-        file: '%APPDATA%\\Antigravity\\User\\settings.json',
-        keyPath: 'workbench\\.iconTheme',
-        value: 'misfit-glass'
-    },
-    {
-        type: 'setJsonValue',
-        file: '%APPDATA%\\Antigravity\\User\\settings.json',
-        keyPath: 'workbench\\.productIconTheme',
-        value: 'misfit-carbon'
-    },
-    {
-        type: 'setJsonValue',
-        file: '%APPDATA%\\Antigravity\\User\\settings.json',
-        keyPath: 'workbench\\.colorCustomizations',
-        value: {
-            'editor.background': '#05050500',
-            'terminal.background': '#05050500',
-            'panel.background': '#05050500',
-            'sideBar.background': '#05050500',
-            'activityBar.background': '#05050500',
-            'statusBar.background': '#05050500',
-            'titleBar.activeBackground': '#05050500',
-            'titleBar.inactiveBackground': '#05050500',
-            'tab.activeBackground': '#05050540',
-            'tab.inactiveBackground': '#05050520',
-            'tab.unfocusedActiveBackground': '#05050530',
-            'tab.unfocusedInactiveBackground': '#05050518',
-            'tab.hoverBackground': '#0a120a33',
-            'tab.activeBorder': '#7DFB3940',
-            'tab.activeBorderTop': '#7DFB3966',
-            'tab.unfocusedActiveBorder': '#7DFB3933',
-            'tab.unfocusedActiveBorderTop': '#7DFB3940',
-            'terminal.selectionBackground': '#ffbe4c40'
-        }
-    }
-];
-
-const ANTIGRAVITY_LITE_STEPS: InstallStep[] = [
-    { type: 'copy', src: 'extensions/antigravity-carbon', dest: '%USERPROFILE%\\.antigravity\\extensions\\antigravity-carbon' },
-    { type: 'copy', src: 'extensions/antigravity-glass-icons', dest: '%USERPROFILE%\\.antigravity\\extensions\\antigravity-glass-icons' },
-    { type: 'copy', src: 'extensions/MisfitSanctuaryTheme', dest: '%USERPROFILE%\\.antigravity\\extensions\\MisfitSanctuaryTheme' },
-    ...ANTIGRAVITY_FULL_STEPS.filter(step => step.type !== 'copy')
-];
+const PRESET_URL = 'https://raw.githubusercontent.com/Plnderer/Misfit-Studio/main/installer-ui/public/presets.json';
 
 const placeholderPattern = /<[^>]+>/;
 
@@ -567,38 +496,7 @@ const normalizePresetData = (raw: any): PresetData => ({
 });
 
 const createDefaultPresets = (): Preset[] => {
-    const fullSteps = ANTIGRAVITY_FULL_STEPS
-        .map(step => manifestStepToUi(step, 'payloads/antigravity'))
-        .filter((step): step is UiStep => step !== null);
-    const liteSteps = ANTIGRAVITY_LITE_STEPS
-        .map(step => manifestStepToUi(step, 'payloads/antigravity'))
-        .filter((step): step is UiStep => step !== null);
-
     return [
-        {
-            name: 'Antigravity Full',
-            data: {
-                appName: 'Misfit Vibe Installer',
-                version: '1.0.0',
-                publisher: 'MisfitSanctuary.Art',
-                description: 'Installs the Misfit Vibe extension suite and applies the Antigravity UI overlays.',
-                advancedMode: false,
-                payloadDir: 'payloads/antigravity',
-                steps: uiStepsToPresetSteps(fullSteps)
-            }
-        },
-        {
-            name: 'Antigravity Lite',
-            data: {
-                appName: 'Misfit Vibe Installer',
-                version: '1.0.0',
-                publisher: 'MisfitSanctuary.Art',
-                description: 'Installs the Misfit Vibe extension suite and applies the Antigravity UI overlays.',
-                advancedMode: false,
-                payloadDir: 'payloads/antigravity',
-                steps: uiStepsToPresetSteps(liteSteps)
-            }
-        },
         {
             name: 'Custom',
             data: {
@@ -622,6 +520,7 @@ const loadPresetLibrary = (): Preset[] => {
         if (!stored) return createDefaultPresets();
         const parsed = JSON.parse(stored);
         if (!Array.isArray(parsed)) return createDefaultPresets();
+
         const normalized = parsed
             .map((preset) => {
                 if (!preset || typeof preset !== 'object') return null;
@@ -631,6 +530,7 @@ const loadPresetLibrary = (): Preset[] => {
                 return { name, data: normalizePresetData(raw.data ?? {}) };
             })
             .filter((preset): preset is Preset => preset !== null);
+
         return normalized.length ? normalized : createDefaultPresets();
     } catch {
         return createDefaultPresets();
@@ -679,6 +579,38 @@ export default function Dashboard() {
     const [selectedPresetName, setSelectedPresetName] = useState('Custom');
 
     const [building, setBuilding] = useState(false);
+
+    useEffect(() => {
+        const fetchRemotePresets = async () => {
+            try {
+                // Fetch from remote or local fallback
+                const res = await fetch(PRESET_URL, { cache: 'no-cache' }).catch(() => fetch('/presets.json'));
+                if (res && res.ok) {
+                    const json = await res.json();
+                    if (Array.isArray(json)) {
+                        const remotePresets = json.map((item: any) => ({
+                            name: item.name ?? 'Unknown',
+                            data: normalizePresetData(item)
+                        }));
+
+                        setPresets(prev => {
+                            const newNames = new Set(remotePresets.map(p => p.name));
+                            // Keep existing presets that don't conflict with remote ones (e.g. Custom)
+                            const distinct = prev.filter(p => !newNames.has(p.name));
+                            // Put remote presets first
+                            return [...remotePresets, ...distinct];
+                        });
+
+                        // If we are currently on "Custom" and it's empty, maybe select the first remote one? 
+                        // Or just let user choose.
+                    }
+                }
+            } catch (e) {
+                console.warn('Failed to load presets', e);
+            }
+        };
+        fetchRemotePresets();
+    }, []);
 
     useEffect(() => {
         const unlistenPromise = listen<string>('log', (event) => {
@@ -1164,9 +1096,9 @@ export default function Dashboard() {
         return { issueMap, errorCount, warningCount };
     }, [steps]);
 
-    const handleBuild = async () => {
+    const doBuild = async (fastMode: boolean) => {
         setBuilding(true);
-        setLogs(p => [...p, 'Summoning the forge...']);
+        setLogs(p => [...p, fastMode ? 'Quick forging engaged...' : 'Summoning the forge...']);
 
         try {
             const payloadMap = new Map<string, string>();
@@ -1345,8 +1277,9 @@ export default function Dashboard() {
             };
             const target = await invoke<BuildTargetInfo>('inspect_build_target', { request: inspectReq });
 
-            let forceOverwrite = false;
-            if (target.exists) {
+            let forceOverwrite = fastMode; // Fast mode defaults to overwrite
+
+            if (!fastMode && target.exists) {
                 if (target.isAbsolute && !target.hasMarker) {
                     const warn = await confirm(
                         `The output folder exists but does not contain a .misfit-studio marker:\n${target.path}\n\nDo you want to continue?`,
@@ -1393,6 +1326,9 @@ export default function Dashboard() {
             setBuilding(false);
         }
     };
+
+    const handleBuild = () => doBuild(false);
+    const handleFastForge = () => doBuild(true);
 
     return (
         <div className="studio-page">
@@ -2001,6 +1937,9 @@ export default function Dashboard() {
                     <div className="actions">
                         <button className="btn-primary" onClick={handleBuild} disabled={building}>
                             {building ? 'Forging...' : 'Forge Installer'}
+                        </button>
+                        <button className="btn-secondary" onClick={handleFastForge} disabled={building} title="Overwrite target immediately">
+                            Fast Forge (Overwrite)
                         </button>
                     </div>
 
