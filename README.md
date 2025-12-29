@@ -12,6 +12,23 @@ Misfit Installer Kit is a Tauri-based desktop app that ships in two modes:
 - `manifests/`: Bundled manifest(s) for Installer builds.
 - `payloads/`: Bundled payload assets used by manifests.
 
+## New Features (v1.0.3)
+
+### Dynamic Presets
+The installer fetches the latest presets from a remote source on launch.
+- **Source**: GitHub (`installer-ui/public/presets.json`).
+- **Offline Mode**: Automatically falls back to local `presets.json` if the network is unavailable.
+- **Customization**: Allows updating theme configurations without re-distributing the binary.
+
+### Fast Forge (Developer Mode)
+A "Fast Forge" button is available in the **Build** tab for rapid iteration.
+- **Bypasses** confirmation dialogs ("Folder Exists", "Confirm Delete").
+- **Ideal for** quickly overwriting a target directory during theme development (e.g. testing CSS changes on a live extension).
+
+### Visual Styles
+- **Misfit Vibe**: Custom "Tinted Glass" aesthetic with neon accents (green/orange) and active blur effects.
+- **Refined Hover**: "Ultra-Glass" hover widgets with reduced opacity and simulated reflection for a premium feel.
+
 ## Quick start
 
 Install UI dependencies first:
