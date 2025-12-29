@@ -73,6 +73,8 @@ fn resolve_manifest_path(app_handle: &tauri::AppHandle) -> Option<PathBuf> {
 }
 
 fn normalize_rel_path(path_str: &str, allow_current: bool) -> Result<PathBuf, String> {
+    // FIX: Normalize backslashes to forward slashes for cross-platform compatibility
+    let path_str = path_str.replace('\\', "/");
     let trimmed = path_str.trim();
     if trimmed.is_empty() {
         return if allow_current {
@@ -400,7 +402,20 @@ fn expand_env_vars(input: &str) -> String {
 }
 
 fn resolve_path(base: &Path, path: &str) -> PathBuf {
-    let expanded = expand_env_vars(path);
+    let mut expanded = expand_env_vars(path);
+    
+    // FIX: Specialized mapping for macOS to handle Windows-centric presets
+    if cfg!(target_os = "macos") {
+        expanded = expanded.replace('\\', "/");
+        // Check for common Windows preset paths and map them to macOS standards
+        if expanded.contains("%LOCALAPPDATA%/Programs/Antigravity/resources") {
+            expanded = expanded.replace("%LOCALAPPDATA%/Programs/Antigravity/resources", "/Applications/Antigravity.app/Contents/Resources");
+        } else if expanded.contains("Programs/Antigravity/resources") {
+             // Fallback if env var was stripped or different
+            expanded = expanded.replace("Programs/Antigravity/resources", "/Applications/Antigravity.app/Contents/Resources");
+        }
+    }
+    
     let candidate = PathBuf::from(&expanded);
     if candidate.is_absolute() {
         candidate
