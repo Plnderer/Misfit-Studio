@@ -1,4 +1,3 @@
-/* MisfitSanctuary.Art UI START */
 /* Antigravity synthwave animations (ported from Synthwave x Fluoromachine Epic Animations) */
 .monaco-workbench {
   --ag-neon-pink: #7dfb39;
@@ -67,15 +66,19 @@
   position: relative;
 }
 
-.monaco-editor .monaco-hover {
-  background-color: var(--ag-tooltip-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 20px;
+.monaco-editor .monaco-hover,
+.monaco-editor .monaco-hover .monaco-hover-content {
+  background-color: var(--ag-tooltip-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--ag-glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 4px !important;
   transition: opacity 0.2s !important;
   opacity: 1;
   animation: ag-tooltippulse 4s infinite linear;
   position: relative;
+  border-radius: 6px !important;
 }
 
 .monaco-editor .monaco-hover.hidden {
@@ -132,6 +135,19 @@
   right: 0;
   bottom: 0;
   pointer-events: none;
+}
+
+/* Disable scanlines entirely to remove hover ghost line */
+.editor-group-container:before {
+  opacity: 0 !important;
+  background-image: none !important;
+}
+
+/* Hide scanlines behind hover to avoid the "ghost line" artifact */
+@supports selector(:has(*)) {
+  .editor-group-container:has(.monaco-hover)::before {
+    opacity: 0 !important;
+  }
 }
 
 .monaco-editor:before {
@@ -409,4 +425,207 @@
   }
 }
 
-/* MisfitSanctuary.Art UI END */
+/* Antigravity Fixes */
+@keyframes ag-tooltippulse {
+  0% {
+    box-shadow: 0 0 5px 0 var(--ag-neon-cyan);
+    border-color: var(--ag-neon-cyan);
+  }
+
+  50% {
+    box-shadow: 0 0 15px 2px var(--ag-neon-cyan);
+    border-color: var(--ag-neon-blue);
+  }
+
+  100% {
+    box-shadow: 0 0 5px 0 var(--ag-neon-cyan);
+    border-color: var(--ag-neon-cyan);
+  }
+}
+
+@keyframes ag-collapse {
+  0% {
+    box-shadow: 0 0 5px 0 var(--ag-neon-yellow);
+    background-color: rgba(246, 165, 38, 0.2);
+  }
+
+  70% {
+    box-shadow: 0 0 15px 5px var(--ag-neon-yellow);
+    background-color: rgba(246, 165, 38, 0.4);
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+
+
+/* SUPER FORCEFUL OVERRIDES FOR GLASS EFFECT - V5 (User-Provided "Outline + Spacer" Strategy) */
+/* Rationale: Use outline for border (no layout impact) and specific spacer for subpixel clipping. */
+
+.monaco-editor .monaco-hover {
+  border: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  /* Clear glass with black tint */
+  background-color: rgba(6, 6, 6, 0.14) !important;
+  background-image:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.025) 30%,
+      rgba(255, 255, 255, 0.00) 70%) !important;
+  background-repeat: no-repeat;
+  background-size: 100% 100% !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 8px !important;
+
+  /* non-layout border + glow (Misfit Green Theme) */
+  outline: none !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+  background-clip: padding-box !important;
+
+  animation: none !important;
+  overflow: visible !important;
+  transform: translateZ(0);
+  /* Stabilize subpixel rendering */
+  clip-path: inset(0 0 1px 0 round 8px);
+}
+
+/* Kill legacy neon line */
+.monaco-editor .monaco-hover::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 1px spacer to prevent bottom-line clipping from subpixel rounding */
+.monaco-editor .monaco-hover .monaco-scrollable-element {
+  background-color: transparent !important;
+  padding-bottom: 0 !important;
+  box-sizing: border-box !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Hide hover scrollbars that read as a thin vertical line on small tooltips */
+.monaco-editor .monaco-hover .monaco-scrollable-element .scrollbar,
+.monaco-editor .monaco-hover .monaco-scrollable-element .scrollbar .slider {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+}
+
+/* Remove Monaco scroll shadows that can appear as a thin vertical line */
+.monaco-editor .monaco-hover .monaco-scrollable-element > .shadow {
+  display: none !important;
+}
+
+/* Drop any internal pseudo-element separators */
+.monaco-editor .monaco-hover .monaco-scrollable-element::before,
+.monaco-editor .monaco-hover .monaco-scrollable-element::after,
+.monaco-editor .monaco-hover .monaco-hover-content::before,
+.monaco-editor .monaco-hover .monaco-hover-content::after {
+  content: none !important;
+}
+
+/* Remove internal hover separators/shadows that can read as a thin line */
+.monaco-editor .monaco-hover .hover-contents,
+.monaco-editor .monaco-hover .hover-row,
+.monaco-editor .monaco-hover .hover-row-contents,
+.monaco-editor .monaco-hover .monaco-scrollable-element .shadow {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-image: none !important;
+}
+
+/* Remove hover HR separators that render as a thin line */
+.monaco-editor .monaco-hover hr {
+  border: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Ensure inner content is transparent */
+.monaco-editor .monaco-hover .monaco-hover-content {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: rgba(236, 255, 236, 0.95) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Eliminate inner edge lines from scrollable container + row */
+.monaco-editor .monaco-hover .monaco-scrollable-element,
+.monaco-editor .monaco-hover .hover-row {
+  background: transparent !important;
+  border: none !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Mask scanlines/residual stripe inside hover without changing layout */
+.monaco-editor .monaco-hover {
+  position: relative !important;
+}
+
+.monaco-editor .monaco-hover::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: -1px !important;
+  border-radius: inherit !important;
+  display: block !important;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 8, 8, 0.22) 0%,
+    rgba(8, 8, 8, 0.18) 70%,
+    rgba(8, 8, 8, 0.30) 100%
+  ) !important;
+  backdrop-filter: blur(28px) saturate(155%) brightness(0.98) contrast(1.08) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(155%) brightness(0.98) contrast(1.08) !important;
+  box-shadow:
+    0 0 10px rgba(125, 251, 57, 0.04),
+    0 0 18px rgba(6, 12, 8, 0.16) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.monaco-editor .monaco-hover::after {
+  content: none !important;
+  display: none !important;
+  height: 0 !important;
+  background: none !important;
+}
+
+.monaco-editor .monaco-hover .monaco-hover-content {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Kill resizable hover chrome (sashes/shadows/scrollbars) that paints the thin line */
+.monaco-resizable-hover {
+  border: none !important;
+  box-shadow: none !important;
+}
+.monaco-resizable-hover .monaco-sash,
+.monaco-resizable-hover .shadow {
+  display: none !important;
+}
+.monaco-resizable-hover .scrollbar,
+.monaco-resizable-hover .scrollbar .slider {
+  opacity: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+
