@@ -1,0 +1,13 @@
+# This file defines a hierarchy of code owners for the repository.
+# GitHub will automatically request reviews from these owners when their relevant files are changed.
+
+# Global owner
+*       @Plnderer
+
+# Core application logic
+/src-tauri/   @Plnderer
+/installer-ui/ @Plnderer
+
+# GitHub Actions and Security
+/.github/     @Plnderer
+/SECURITY.md  @Plnderer
